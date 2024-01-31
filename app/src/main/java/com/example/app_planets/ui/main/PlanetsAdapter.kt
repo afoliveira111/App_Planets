@@ -29,6 +29,8 @@ class PlanetsAdapter : RecyclerView.Adapter<PlanetsAdapter.ViewHolder>() {
 
         fun bind(planetData: PlanetData) {
             view.findViewById<TextView>(R.id.title).text = planetData.name
+            view.findViewById<TextView>(R.id.description).text = planetData.description
+
 
         }
     }
