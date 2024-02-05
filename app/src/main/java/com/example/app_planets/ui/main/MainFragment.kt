@@ -1,23 +1,26 @@
 package com.example.app_planets.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_planets.R
 
 class MainFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: PlanetListViewModel
     private val adapter = PlanetsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PlanetListViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
@@ -31,7 +34,29 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val list = view.findViewById<RecyclerView>(R.id.list)
-        list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        list.adapter = adapter
+        val loading = view.findViewById<ProgressBar>(R.id.loading)
+        val error = view.findViewById<ImageView>(R.id.error)
+        list.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val state = viewModel.loadData()
+        when (state) {
+            is State.Content -> {
+                adapter.setData(state.list)
+                list.adapter = adapter
+                loading.isVisible = false
+                list.isVisible = true
+                error.isVisible = false
+            }
+            State.Error -> {
+                loading.isVisible = false
+                list.isVisible = false
+                error.isVisible = true
+            }
+            State.Loading -> {
+                loading.isVisible = true
+                list.isVisible = false
+                error.isVisible = false
+            }
+        }
     }
 }
