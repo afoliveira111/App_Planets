@@ -1,11 +1,16 @@
 package com.example.app_planets.ui.main
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class PlanetListViewModel : ViewModel() {
 
-    fun loadData(): State {
-        return State.Content(
+    val state = MutableLiveData<State>()
+
+    fun loadData() {
+
+         state.value = State.Loading
+         state.value = State.Content(
             listOf(
                 PlanetData("Terra", "Descricao Terra"),
                 PlanetData("Jupiter", "Descricao Jupiter"),
