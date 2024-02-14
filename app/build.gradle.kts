@@ -60,8 +60,8 @@ dependencies {
     implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 
     //Hilt
-    implementation ("com.google.dagger:hilt-android:2.44")
-    kapt ("com.google.dagger:hilt-compiler:2.44")
+    implementation ("com.google.dagger:hilt-android:2.47")
+    kapt ("com.google.dagger:hilt-compiler:2.47")
 
 
     testImplementation("junit:junit:4.13.2")
@@ -72,3 +72,4 @@ dependencies {
 kapt {
     correctErrorTypes = true
 }
+

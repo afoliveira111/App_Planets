@@ -5,9 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.app_planets.data.PlanetsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PlanetListViewModel(private val repository: PlanetsRepository) : ViewModel() {
+@HiltViewModel
+class PlanetListViewModel @Inject constructor(private val repository: PlanetsRepository) :
+    ViewModel() {
 
     private val state = MutableLiveData<State>()
     val viewState : LiveData<State>
