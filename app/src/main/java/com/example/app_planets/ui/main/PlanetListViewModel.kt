@@ -7,9 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.app_planets.data.PlanetsRepository
 import kotlinx.coroutines.launch
 
-class PlanetListViewModel : ViewModel() {
+class PlanetListViewModel(private val repository: PlanetsRepository) : ViewModel() {
 
-    private val repository = PlanetsRepository()
     private val state = MutableLiveData<State>()
     val viewState : LiveData<State>
         get() = state
