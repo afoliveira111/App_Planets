@@ -43,6 +43,9 @@ android {
 }
 
 dependencies {
+    val roomVersion = "2.6.1"
+
+
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -66,6 +69,11 @@ dependencies {
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.15.1")
+
+    //Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
